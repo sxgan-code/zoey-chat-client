@@ -3,54 +3,53 @@
 	<img width="200px" height="200px" alt="logo" src="./resources/icon.png">
 </p>
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Zoey Chat Client v1.0.0</h1>
-<h4 align="center">基于Electron31+vite5+TypeScript5+vue3+pinia等技术实现的聊天客户端</h4>
+<h4 align="center">Chat client based on Electron31+vite5+TypeScript5+vue3+pinia and other technologies</h4>
 <p align="center">
 	<a href="https://gitee.com/sxgan/zoey-chat-boot"><img src="https://img.shields.io/badge/Zoey Chat-v1.0.0-brightgreen.svg"></a>
 	<a href="https://gitee.com/sxgan/zoey-chat-boot/raw/master/LICENSE"><img src="https://img.shields.io/badge/LICENSE-Apache License-red.svg"></a>
 </p>
-持续更新中。。。@sxgan
+Continuously updated. . . @sxgan
 
-所有资源来源于网络公开资源，仅供学习
+All resources come from public resources on the Internet and are for learning only
 
-## 平台简介
+## PLATFORM INTRODUCTION
 
-## 演示图
+## DEMONSTRATION DIAGRAM
 
 ![review_01.gif](public%2Fdiagram%2Freview_01.gif)
 
-## 项目启动说明
+## PROJECT START INSTRUCTIONS
 
-### 安装依赖
+### INSTALL DEPENDENCIES
 
 ```sh
 npm install
 ```
 
-### 启动命令
+### START COMMAND
 
-注意：dev使用的为本地环境，pro为线上环境，图片采用云端，请使用pro环境启动，pro环境启动会存在图片无法加载，
-但使用build构建后正常， 原因可能和本地开发有关，也可自行添加图片到本地，注意修改路径
+Note: dev uses the local environment, pro uses the online environment, and the pictures are in the cloud. Please use the pro environment to start. When the pro environment is started, the pictures will not be loaded.
+But it works fine after using build. The reason may be related to local development. You can also add pictures to the local area by yourself. Be careful to modify the path.
 
 ```shell
 npm run pro
 ```
 
-### 构建命令
+### BUILD COMMAND
 
 ```shell
 npm run build
 ```
+Note: The initial startup loading will be slow. The packaged files are in the `dist-electron/release/` directory. The packaged version is usually stored in this directory.
+Enter the corresponding installation execution file according to the version. Win-unpacked is a green version that requires no installation and can directly run the exe file. The same applies to other system environments.
 
-注意：初次启动加载会较慢，打包后的文件在`dist-electron/release/`目录下，该目录下一般会存打包版本，
-根据版本进入对应的安装执行文件，win-unpacked为绿色版免安装，可直接运行exe文件，其他系统环境同理
-
-### 解决进程残留并快速重启
+### RESOLVE PROCESS RESIDUE AND RESTART QUICKLY
 
 ```shell
 TASKKILL /F /IM electron.exe  | npm run dev
 ```
 
-## 项目结构说明
+## PROJECT STRUCTURE DESCRIPTION
 
 ```text
 + ├─┬ electron
@@ -86,20 +85,18 @@ TASKKILL /F /IM electron.exe  | npm run dev
   ├── package.json                    # 依赖
   └── vite.config.ts                  # vite 配置文件
 ```
+svg images can be placed directly into the `src/assets/images/common/svg` directory and will be automatically loaded into the svgplugin.vue page
 
-svg图片可直接放入`src/assets/images/common/svg`目录下，将自动加载到svgplugin.vue页面
+## Installation of images and some package management tools
 
-## 镜像及部分包管理工具安装
-
-1、安装 cnpm 淘宝镜像：
-
+1、INSTALL CNPM TAOBAO IMAGE
 ```shell
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 npm install -g cnpm --registry=https://registry.npmmirror.com
 ```
 
-2、将npm设置为淘宝镜像：
+2、SET NPM AS TAOBAO MIRROR
 
 ```shell
 npm config set registry https://registry.npm.taobao.org
@@ -107,33 +104,32 @@ npm config set registry https://registry.npm.taobao.org
 npm config set registry https://registry.npmmirror.com
 ```
 
-3、通过npm查看cnpm镜像设置：
+3、VIEW CNPM MIRROR SETTINGS THROUGH NPM
 
 ```shell
 npm config get registry
 ```
 
-4、通过cnpm查看cnpm镜像设置：(相当于使用cnpm)
+4、View cnpm image settings through cnpm: (equivalent to using cnpm)
 
 ```shell
 cnpm config get registry
 ```
 
-5、安装yarn
+5、INSTALL YARN
 
 ```shell
 npm install -g yarn --registry=https://registry.npmmirror.com
 ```
 
-## 构建问题
+## BUILD ISSUES
 
-注意：使用`win+x`中的`终端管理员`窗口执行，防止权限原因下载失败
+Note: Use the `Terminal Administrator` window in `win+x` to prevent download failure due to permissions.
 
-使用`npm run build` 时无法下载github必要构建包，此时我们需要使用yarn来构建下载，下载后的包
-一般会在c盘，构建一次即可永久使用，所以再使用npm构建是就不会再去下载了
-
+When using `npm run build`, the necessary github build package cannot be downloaded. At this time, we need to use yarn to build the downloaded package.
+Generally it will be on the c drive, and it can be used permanently after building it once, so if you use npm to build it again, you will not download it again.
 ```shell
 yarn run build
 ```
 
-后续使用`npm run build`即可，上述命令只是为了方便下载
+You can use `npm run build` later. The above command is just for convenience of downloading.

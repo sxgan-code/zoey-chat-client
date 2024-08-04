@@ -11,6 +11,8 @@
 .main-root {
   width: 100vw;
   height: 100vh;
-  background: #FFFFFF;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #ffffff;
 }
 </style>
