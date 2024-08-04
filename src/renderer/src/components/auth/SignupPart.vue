@@ -6,9 +6,7 @@ import { checkAndReturnMsg } from '@/utils/verify-utils.ts'
 import { sendMailVerifyCode, signupApi } from '@/api/auth'
 import message from '@/components/message/index.ts'
 
-/**
- * 公共变量和方法
- */
+const isLoading = defineModel<boolean>()
 const errorMsg = ref('')
 const signupData = ref<LoginData>({
   email: 'sxgan@foxmail.com',
@@ -42,9 +40,10 @@ const verifyBtnBool = ref(false)
 const getEmailVerify = async () => {
   const msg = checkAndReturnMsg(signupData.value.email, 'email')
   if (msg === '') {
+    isLoading.value = true
     errorMsg.value = ''
     // 生成一个时间
-    let time = 60
+    let time = 5
     // 生成一个自动计时的函数
     const t = setInterval(() => {
       // time 自减
@@ -58,6 +57,7 @@ const getEmailVerify = async () => {
         verifyBtnBool.value = false
         clearInterval(t)
         btnVal.value = '获取验证码'
+        isLoading.value = false
       }
     }, 1000)
 
@@ -82,16 +82,17 @@ const getEmailVerify = async () => {
 const toSignup = () => {
   verifyForm()
   if (errorMsg.value == '') {
+    isLoading.value = true
     signupApi(signupData.value)
       .then((res) => {
         console.log(res)
-        // loading.value = false
+        isLoading.value = false
         message.success('注册成功，请登录')
         // isRegister.value = false
       })
       .catch((err) => {
         console.log(err)
-        // loading.value = false
+        isLoading.value = false
         message.error('系统错误')
       })
   }

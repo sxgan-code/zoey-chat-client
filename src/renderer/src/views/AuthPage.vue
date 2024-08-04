@@ -4,7 +4,8 @@ import SignupPart from '@/components/auth/SignupPart.vue'
 import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
 import { ref } from 'vue'
 const isLogin = ref(true)
-
+import { vLoading } from '@/components/loading/loading.ts'
+const isLoading = ref(false)
 function selectCurr(curr: boolean) {
   // errMsg.value = ''
   isLogin.value = curr
@@ -12,7 +13,7 @@ function selectCurr(curr: boolean) {
 </script>
 
 <template>
-  <div class="login-root-box">
+  <div v-loading="isLoading" class="login-root-box">
     <div class="head-controller-close">
       <span class="icon-box-close">
         <zoey-icon class="icon-ali-close" name="ali_close" />
@@ -24,10 +25,10 @@ function selectCurr(curr: boolean) {
     </div>
     <div class="auth">
       <div v-if="isLogin" class="auth-signin">
-        <signin-part />
+        <signin-part v-model="isLoading"/>
       </div>
       <div v-if="!isLogin" class="auth-signup">
-        <signup-part />
+        <signup-part v-model="isLoading"/>
       </div>
     </div>
   </div>
