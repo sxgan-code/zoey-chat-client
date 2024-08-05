@@ -7,9 +7,15 @@ import { vLoading } from '@/components/loading/loading.ts'
 
 const isLogin = ref(true)
 const isLoading = ref(false)
+
 function selectCurr(curr: boolean) {
   // errMsg.value = ''
   isLogin.value = curr
+}
+
+const closeWindow = () => {
+  console.log('closeWindow')
+  window.electron.ipcRenderer.send('win-ctrl', 'close')
 }
 </script>
 
@@ -17,7 +23,11 @@ function selectCurr(curr: boolean) {
   <div v-loading="isLoading" class="login-root-box">
     <div class="head-controller-close">
       <span class="icon-box-close">
-        <zoey-icon class="icon-ali-close" name="ali_close" />
+        <zoey-icon
+          class="icon-ali-close"
+          name="ali_close"
+          @click="closeWindow"
+        />
       </span>
     </div>
     <div class="select-win-box">
@@ -39,6 +49,7 @@ function selectCurr(curr: boolean) {
 .login-root-box {
   width: 100vw;
   height: 100vh;
+  background: #ffffff;
   font-size: 1rem;
 
   .head-controller-close {
@@ -57,10 +68,10 @@ function selectCurr(curr: boolean) {
       justify-content: center;
       align-items: center;
       margin-right: 0.5rem;
-      -webkit-app-region: no-drag; // 鼠标移入时，不触发拖拽
+
       .icon-ali-close {
         fill: #cccccc;
-
+        -webkit-app-region: no-drag; // 鼠标移入时，不触发拖拽
         &:hover {
           fill: #7bcdef;
         }

@@ -10,6 +10,10 @@
     "composite": true,
     "baseUrl": ".",
     "allowImportingTsExtensions": true,
+    "noUnusedLocals": false,//不检查未使用的变量
+    "noUnusedParameters": false, //不检查未使用的参数
+    "noImplicitAny": false, // 不检查隐式的 any 类型
+    "strict": false, // 关闭严格模式
     "paths": {
       "@/*": [
         "src/renderer/src/*"

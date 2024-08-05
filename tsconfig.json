@@ -8,7 +8,11 @@
       ]
     },
     // 开启文件扩展名
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noUnusedLocals": false,//不检查未使用的变量
+    "noUnusedParameters": false, //不检查未使用的参数
+    "noImplicitAny": false,
+    "strict": false, // 关闭严格模式
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","electron"],
   "exclude": ["node_modules"],

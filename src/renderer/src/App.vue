@@ -13,6 +13,5 @@
   height: 100vh;
   border-radius: 1rem;
   overflow: hidden;
-  background: #ffffff;
 }
 </style>

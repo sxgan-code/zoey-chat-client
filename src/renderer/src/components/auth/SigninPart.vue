@@ -6,6 +6,7 @@ import ZoeyButton from '@/components/btn/ZoeyButton.vue'
 import { checkAndReturnMsg } from '@/utils/verify-utils.ts'
 import message from '@/components/message'
 import { goToHref } from '@/utils/common-utils.ts'
+import store from '../../../../main/ele-store.ts'
 
 /**
  * 公共变量及方法
@@ -60,13 +61,19 @@ const toSignin = () => {
           // loading.value = false
           localStorage.setItem('token', res.data.token)
           goToHref('local_router', '/main')
+          window.electron.ipcRenderer.send('signin-success', {
+            token: res.data.token,
+            email: signinData.value.email,
+            width: 1200,
+            height: 800
+          })
 
           message.success('登录成功')
         } else {
           message.error(res.message)
         }
       })
-      .catch((err) => {
+      .catch(() => {
         isLoading.value = false
         message.error('系统错误')
         goToHref('local_router', '/main')

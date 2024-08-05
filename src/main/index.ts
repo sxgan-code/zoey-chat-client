@@ -2,13 +2,15 @@ import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { onSigninSuccess, onWindowsCtrl } from './ipc.ts'
+import { SigninSuccessData } from './ipc-types.ts'
 
 const signin_width = 600
 const signin_height = 520
-
+let authWindow = null
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  authWindow = new BrowserWindow({
     icon: icon,
     title: 'Sign In',
     width: signin_width,
@@ -26,11 +28,11 @@ function createWindow(): void {
     }
   })
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
+  authWindow.on('ready-to-show', () => {
+    authWindow.show()
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  authWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
@@ -38,10 +40,27 @@ function createWindow(): void {
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    authWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    authWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  // Signin success
+  onSigninSuccess((config: SigninSuccessData) => {
+    authWindow.setResizable(true)
+    authWindow.setSize(config.width, config.height, true)
+    authWindow.center()
+    authWindow.setResizable(true)
+    authWindow.setMaximumSize(1200, 800)
+  })
+  // Windows Ctrl
+  onWindowsCtrl((ctrlStr: string) => {
+    if (ctrlStr === 'close') {
+      authWindow.close()
+    } else if (ctrlStr === 'minimize') {
+      authWindow.minimize()
+    }
+  })
 }
 
 // This method will be called when Electron has finished

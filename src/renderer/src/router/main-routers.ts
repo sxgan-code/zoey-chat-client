@@ -10,6 +10,11 @@ const mainRouters: RouteRecordRaw[] = [
     path: '/signin',
     name: 'signin',
     component: () => import('@/views/AuthPage.vue')
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import('@/views/MainPage.vue')
   }
 ]
 export default mainRouters
