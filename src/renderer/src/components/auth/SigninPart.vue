@@ -10,6 +10,7 @@ import { goToHref } from '@/utils/common-utils.ts'
 /**
  * 公共变量及方法
  */
+const isLoading = defineModel<boolean>()
 const errorMsg = ref('')
 const signinData = ref<LoginData>({
   email: 'sxgan@foxmail.com',
@@ -21,9 +22,7 @@ const signinData = ref<LoginData>({
   verToken: ''
 })
 const verifyForm = () => {
-  console.log(signinData.value)
   const emailVerify = checkAndReturnMsg(signinData.value.email, 'email')
-  console.log(emailVerify)
   const pwdVerify = checkAndReturnMsg(signinData.value.password, 'pwd')
   if (emailVerify != '') {
     errorMsg.value = emailVerify
@@ -52,24 +51,24 @@ const toSignin = () => {
   if (errorMsg.value == '') {
     // 表单所有元素验证通过，可以提交了
     console.log('登录', signinData.value)
-    // loading.value = true
+    isLoading.value = true
     signinApi(signinData.value)
       .then((res) => {
+        isLoading.value = false
         if (res.status === 200) {
           console.log(res.data.token)
           // loading.value = false
           localStorage.setItem('token', res.data.token)
           goToHref('local_router', '/main')
+
           message.success('登录成功')
         } else {
-          // loading.value = false
           message.error(res.message)
         }
       })
       .catch((err) => {
-        console.log(err)
+        isLoading.value = false
         message.error('系统错误')
-        // loading.value = false
         goToHref('local_router', '/main')
       })
   }

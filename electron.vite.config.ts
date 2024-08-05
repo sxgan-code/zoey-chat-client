@@ -71,11 +71,11 @@ export default defineConfig({
             secure: false, // 如果是https接口，需要配置这个参数
             rewrite: (path) => path.replace(/^\/local/, '')
           },
-          '/dev': {
+          '/api': {
             target: env.VUE_APP_PROXY_URL,
             changeOrigin: true, // 表示开启代理, 允许跨域请求数据
             secure: false, // 如果是https接口，需要配置这个参数
-            rewrite: (path) => path.replace(/^\/dev/, '')
+            rewrite: (path) => path.replace(/^\/api/, '')
           }
         }
       }

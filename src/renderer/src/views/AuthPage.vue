@@ -3,8 +3,9 @@ import SigninPart from '@/components/auth/SigninPart.vue'
 import SignupPart from '@/components/auth/SignupPart.vue'
 import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
 import { ref } from 'vue'
-const isLogin = ref(true)
 import { vLoading } from '@/components/loading/loading.ts'
+
+const isLogin = ref(true)
 const isLoading = ref(false)
 function selectCurr(curr: boolean) {
   // errMsg.value = ''
@@ -25,10 +26,10 @@ function selectCurr(curr: boolean) {
     </div>
     <div class="auth">
       <div v-if="isLogin" class="auth-signin">
-        <signin-part v-model="isLoading"/>
+        <signin-part v-model="isLoading" />
       </div>
       <div v-if="!isLogin" class="auth-signup">
-        <signup-part v-model="isLoading"/>
+        <signup-part v-model="isLoading" />
       </div>
     </div>
   </div>
