@@ -6,7 +6,6 @@ import ZoeyButton from '@/components/btn/ZoeyButton.vue'
 import { checkAndReturnMsg } from '@/utils/verify-utils.ts'
 import message from '@/components/message'
 import { goToHref } from '@/utils/common-utils.ts'
-import store from '../../../../main/ele-store.ts'
 
 /**
  * 公共变量及方法
@@ -59,9 +58,10 @@ const toSignin = () => {
         if (res.status === 200) {
           console.log(res.data.token)
           // loading.value = false
-          localStorage.setItem('token', res.data.token)
-          goToHref('local_router', '/main')
+          // localStorage.setItem('token', res.data.token)
+          // goToHref('local_router', '/main')
           window.electron.ipcRenderer.send('signin-success', {
+            url: '/main',
             token: res.data.token,
             email: signinData.value.email,
             width: 1200,

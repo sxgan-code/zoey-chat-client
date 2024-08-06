@@ -4,7 +4,7 @@
       <svg
         id="mx_n_1722835890651"
         t="1722835890650"
-        class="icon globe-rotating-element"
+        class="icon rotating-element"
         viewBox="0 0 1024 1024"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -76,6 +76,10 @@
     svg {
       width: 8rem;
       height: 8rem;
+    }
+
+    .rotating-element {
+      animation: rotate 2s linear infinite; /* 这里的infinite表示无限次重复播放动画 */
     }
   }
 }
