@@ -57,9 +57,6 @@ const toSignin = () => {
         isLoading.value = false
         if (res.status === 200) {
           console.log(res.data.token)
-          // loading.value = false
-          // localStorage.setItem('token', res.data.token)
-          // goToHref('local_router', '/main')
           window.electron.ipcRenderer.send('signin-success', {
             url: '/main',
             token: res.data.token,

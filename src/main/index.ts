@@ -31,7 +31,9 @@ function createAuthWindow(): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      //关闭web权限检查，允许跨域
+      webSecurity: false
     }
   })
 
@@ -50,6 +52,7 @@ function createAuthWindow(): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     authWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
+    authWindow.webContents.openDevTools({ mode: 'detach' })
     authWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 }
@@ -58,8 +61,8 @@ function createMainWindow(config: SigninSuccessData): void {
   // 获取桌面大小
   let width: number = screen.getPrimaryDisplay().workAreaSize.width
   let height: number = screen.getPrimaryDisplay().workAreaSize.height
-  width = width > 1400 ? 1400 : width
-  height = height > 800 ? 800 : height
+  width = width > 1750 ? 1750 : width
+  height = height > 1000 ? 1000 : height
   // Create the browser window.
   mainWindow = new BrowserWindow({
     icon: icon,
@@ -75,7 +78,9 @@ function createMainWindow(config: SigninSuccessData): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      //关闭web权限检查，允许跨域
+      webSecurity: false
     }
   })
 
@@ -93,7 +98,7 @@ function createMainWindow(config: SigninSuccessData): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + `#${config.url}`)
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'), { url: config.url })
+    mainWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: config.url })
   }
 }
 
