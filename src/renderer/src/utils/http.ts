@@ -1,9 +1,5 @@
 // src\utils\http.ts 参考于https://gitee.com/youlaiorg/vue3-element-admin/blob/master/src/utils/request.ts
-import axios, {
-  type AxiosInstance,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig
-} from 'axios'
+import axios, { type AxiosInstance, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 // useUserStore用于用户权限验证的全局token状态管理
 // import {useUserStore} from "@/store/user-store.ts";
 
@@ -54,7 +50,7 @@ service.interceptors.response.use(
     // ElMessage.error(msg || '系统出错');
     // return Promise.reject(new Error(msg || 'Error'));
   },
-  (error: unknown) => {
+  (error) => {
     if (error.response.data) {
       const { status } = error.response.data
       // token 过期,重新登录

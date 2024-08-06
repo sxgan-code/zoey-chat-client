@@ -2,16 +2,15 @@
 
 <template>
   <div class="main-page">
-    <h1>main page</h1>
+    <div class="menu"></div>
+    <div class="chat-list"></div>
+    <div class="chat-content"></div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .main-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
+  background: #f5f5f5;
   height: 100vh;
   width: 100vw;
 }

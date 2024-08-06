@@ -1,7 +1,7 @@
 import { type Ref } from 'vue'
 
 export default {
-  install(app: unknown) {
+  install(app) {
     tooltip(app)
   }
 }
@@ -25,7 +25,7 @@ export interface TooltipType {
  * 使用示例：&lt;img v-tip="{text:'点击刷新',bg:BackgroundType.black}" width="100" height="30"&gt;
  * @param app
  */
-const tooltip = (app: unknown) => {
+const tooltip = (app) => {
   app.directive('tip', {
     mounted(el: HTMLElement, binding: Ref<TooltipType>) {
       const tooltipText = binding.value.text // 提示文本

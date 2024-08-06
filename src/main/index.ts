@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, screen, shell } from 'electron'
 import { join } from 'path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -7,12 +7,15 @@ import { SigninSuccessData } from './ipc-types.ts'
 
 const auth_win_width = 600
 const auth_win_height = 520
-const main_win_width = 1200
-const main_win_height = 800
+const main_win_width = 1050
+const main_win_height = 750
 let authWindow = null
 let mainWindow = null
 
 function createAuthWindow(): void {
+  const width = screen.getPrimaryDisplay().workAreaSize.width
+  const height = screen.getPrimaryDisplay().workAreaSize.height
+  console.log(width, height)
   // Create the browser window.
   authWindow = new BrowserWindow({
     icon: icon,
@@ -52,12 +55,17 @@ function createAuthWindow(): void {
 }
 
 function createMainWindow(config: SigninSuccessData): void {
+  // 获取桌面大小
+  let width: number = screen.getPrimaryDisplay().workAreaSize.width
+  let height: number = screen.getPrimaryDisplay().workAreaSize.height
+  width = width > 1400 ? 1400 : width
+  height = height > 800 ? 800 : height
   // Create the browser window.
   mainWindow = new BrowserWindow({
     icon: icon,
     title: 'Main',
-    width: main_win_width,
-    height: main_win_height,
+    width: width * 0.6,
+    height: height * 0.75,
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',

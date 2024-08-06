@@ -76,7 +76,6 @@ const getEmailVerify = async () => {
       })
   } else {
     errorMsg.value = msg
-    return false
   }
 }
 const toSignup = () => {

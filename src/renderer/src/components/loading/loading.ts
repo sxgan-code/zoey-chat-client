@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, Ref } from 'vue'
 
 //含有loding样式的组件
 import loadingOne from './index.vue'
@@ -18,7 +18,7 @@ const hideLoadingAnimation = (container: HTMLElement) => {
 
 //自定义指令
 export const vLoading = {
-  mounted(el: HTMLElement, binding: unknown) {
+  mounted(el: HTMLElement, binding: Ref) {
     //创建一个div容器并添加到使用指令的元素中
     const loadingDivContainer = document.createElement('div')
     loadingDivContainer.className = 'loading-container'
@@ -36,7 +36,7 @@ export const vLoading = {
     map.set(el, { loadingDivContainer, value: binding.value })
   },
 
-  updated(el: HTMLElement, binding: unknown) {
+  updated(el: HTMLElement, binding: Ref) {
     //获取元素的loading状态
     const { loadingDivContainer, value: oldValue } = map.get(el) || {}
 
