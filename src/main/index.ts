@@ -72,7 +72,7 @@ function createMainWindow(config: SigninSuccessData): void {
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',
-    resizable: false,
+    resizable: true,
     frame: true,
     transparent: false,
     ...(process.platform === 'linux' ? { icon } : {}),

@@ -54,3 +54,7 @@ html, body {
   background: rgba(#ccc, 0.2);
   opacity: 0;
 }
+
+.drag {
+  -webkit-app-region: drag; // 整个菜单栏可拖拽
+}

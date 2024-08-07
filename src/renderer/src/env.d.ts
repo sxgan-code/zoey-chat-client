@@ -24,3 +24,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare module 'virtual:svg-icons-names' {
+  // eslint-disable-next-line
+  const iconsNames: string[]
+  export default iconsNames
+}
