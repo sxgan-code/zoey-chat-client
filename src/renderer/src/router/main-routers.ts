@@ -14,7 +14,14 @@ const mainRouters: RouteRecordRaw[] = [
   {
     path: '/main',
     name: 'main',
-    component: () => import('@/views/MainPage.vue')
+    component: () => import('@/views/MainPage.vue'),
+    children:[
+      {
+        path:'icons',
+        name:'icons',
+        component:()=>import('@/components/IconPage.vue')
+      }
+    ]
   }
 ]
 export default mainRouters

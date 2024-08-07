@@ -1,70 +1,33 @@
 <script setup lang="ts">
-import ids from 'virtual:svg-icons-names'
+
 import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
-import { copyToClipboard } from '@/utils/common-utils.ts'
+import { copyToClipboard, goToHref } from '@/utils/common-utils.ts'
 </script>
 <template>
   <div class="main-page">
     <div class="menu drag">
-      <div>
-        <img width="20" height="20" src="../assets/img/icon.png" />
+      <div class="avatar-box">
+        <img class="no-drag" src="../assets/img/icon.png" @click="goToHref('local_router','/main/icons')" alt="" />
       </div>
-      <div>
-        <zoey-icon class="chat-icon" name="chat_dangqianhuihua" color="#818181" />
+      <div class="icon-box">
+        <zoey-icon class="chat-icon" name="ali_chat" />
       </div>
-      <div>
-        <zoey-icon class="chat-icon" name="chat_yonghu" color="#818181" />
+      <div class="icon-box">
+        <zoey-icon class="chat-icon" name="ali_accountfilling" />
       </div>
-      <div>
-        <zoey-icon class="chat-icon" name="chat_setting" color="#818181" />
+      <div class="icon-box">
+        <zoey-icon class="chat-icon" name="ali_box" />
       </div>
-
+      <div class="icon-box last-end">
+        <zoey-icon class="chat-icon " name="ali_setting" />
+      </div>
 
     </div>
     <div class="chat-list">
 
-      <zoey-icon name="chat_plus" />
-      <zoey-icon name="chat_zuidapaiduishu" />
-      <zoey-icon name="chat_Female" />
-      <zoey-icon name="chat_yonghu" />
-      <zoey-icon name="chat_wenjianjia" />
-      <zoey-icon name="chat_yijian" />
-      <zoey-icon name="chat_duanxin" />
-      <zoey-icon name="chat_Male" />
-      <zoey-icon name="chat_kaixin" />
-
-      <zoey-icon name="chat_minus" />
-      <zoey-icon name="chat_FullScreen" />
-      <zoey-icon name="chat_close" />
     </div>
-    <div
-      class="chat-content"
-      style="
-        width: 100vw;
-        display: flex;
-        justify-items: center;
-        align-content: center;
-        justify-content: center;
-        flex-wrap: wrap;
-      "
-    >
-      <div
-        v-for="name in ids"
-        style="
-          width: 5rem;
-          height: 5rem;
-          text-align: center;
-          background: #ccc;
-          margin: 1rem;
-          display: flex;
-          justify-content: center;
-          justify-items: center;
-          align-content: center;
-        "
-        @click="copyToClipboard(name.substring(5))"
-      >
-        <zoey-icon style="width: 2rem; height: 2rem" :name="name.substring(5)" />
-      </div>
+    <div class="chat-content">
+      <router-view />
     </div>
   </div>
 </template>
@@ -83,25 +46,51 @@ import { copyToClipboard } from '@/utils/common-utils.ts'
     flex-direction: column;
 
     div {
-      width: 3rem;
-      height: 3rem;
-      margin: 0 1.5rem;
+      width: 4rem;
+      height: 4rem;
       -webkit-app-region: no-drag; // 鼠标移入时，不触发拖拽
-      ::v-deep .svg-icon {
-        fill: #0E8E89;
+      img {
+        width: 4rem;
+        height: 4rem;
       }
+      .chat-icon {
+        fill: #818181;
+        width: 2.2rem;
+        height: 2.2rem;
+        margin: 0.9rem;
+
+      }
+
+      .svg-icon:hover {
+        fill: #20D298;
+      }
+
     }
+    .avatar-box{
+      margin: 2rem 1rem;
+    }
+    .icon-box{
+      margin: 0.5rem 0.9rem;
+    }
+    .last-end{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin-bottom: 2rem;
+    }
+
+
   }
 
 
   .chat-list {
-    flex: 20;
-    width: 8rem;
+    width: 26rem;
+    background: #DEDEDE;
 
   }
 
   .chat-content {
-    flex: 72;
+    width: calc(100vw - 32rem);
     overflow: auto;
   }
 }

@@ -58,3 +58,6 @@ html, body {
 .drag {
   -webkit-app-region: drag; // 整个菜单栏可拖拽
 }
+.no-drag {
+  -webkit-app-region: no-drag; // 鼠标移入时，不触发拖拽
+}
