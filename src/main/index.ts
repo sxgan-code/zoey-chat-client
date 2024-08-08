@@ -69,6 +69,8 @@ function createMainWindow(config: SigninSuccessData): void {
     title: 'Main',
     width: width * 0.6,
     height: height * 0.75,
+    minWidth: width * 0.5,
+    minHeight: height * 0.6,
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',
