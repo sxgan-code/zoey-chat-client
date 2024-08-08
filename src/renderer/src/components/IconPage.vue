@@ -5,7 +5,7 @@ import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
 </script>
 
 <template>
-  <div class="icon-list">
+  <div class="icon-list no-drag">
     <div v-for="name in ids" @click="copyToClipboard(name.substring(5))">
       <zoey-icon :name="name.substring(5)" />
       {{ name.substring(5) }}
