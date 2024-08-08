@@ -74,6 +74,7 @@ const selectCurrNode = (index: number) => {
         }
 
         .time {
+          font-size: 1.2rem;
           color: #999999;
         }
       }

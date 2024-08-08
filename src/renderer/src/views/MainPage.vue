@@ -78,7 +78,7 @@ const getMenuStyleClass = (index: number) => {
     <div class="chat-right-box">
       <div class="win-ctrl drag">
         <div class="no-drag" @click="winCtrl('min')">
-          <zoey-icon width="1.8rem" height="1.8rem" name="ail_minus" />
+          <zoey-icon width="1.6rem" height="1.6rem" name="ail_minus" />
         </div>
         <div class="no-drag" @click="winCtrl('maxOrUnmax')">
           <zoey-icon width="1.6rem" height="1.6rem" name="ali_FullScreen" />
@@ -87,7 +87,7 @@ const getMenuStyleClass = (index: number) => {
           <zoey-icon width="2rem" height="2rem" name="ali_close" />
         </div>
       </div>
-      <div class="chat-content">
+      <div class="chat-content drag">
         <router-view />
       </div>
 
@@ -158,7 +158,7 @@ const getMenuStyleClass = (index: number) => {
     .list-top {
       height: 6.8rem;
       width: calc(100% - 0.2rem);
-      background: #efefef;
+      background: #f7f7f7;
       border-right: 0.2rem solid #eee;
       box-shadow: 0 0.1rem 0.2rem #ccc;
       display: flex;
@@ -225,8 +225,11 @@ const getMenuStyleClass = (index: number) => {
       width: 26rem;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden;
+      background: #DDDDDD;
+      &:hover{
+        overflow-y: auto;
+      }
     }
   }
 
@@ -234,22 +237,21 @@ const getMenuStyleClass = (index: number) => {
   .chat-right-box {
     height: 100vh;
     width: calc(100vw - 32rem);
-
+    display: flex;
+    flex-direction: column;
     .win-ctrl {
       width: 100%;
-      height: 2rem;
+      height: 3rem;
       display: flex;
       justify-content: end;
-      align-items: center;
 
       div {
         display: flex;
+        padding: 0 0.5rem;
+        width: 3rem;
+        height: 3rem;
         justify-content: center;
         align-items: center;
-        padding: 0 0.5rem;
-        width: 2rem;
-        height: 2rem;
-
         &:hover {
           background: #e2e2e2;
         }
@@ -259,6 +261,7 @@ const getMenuStyleClass = (index: number) => {
         }
 
         svg {
+          width: 2rem;
           fill: #333333;
         }
       }
