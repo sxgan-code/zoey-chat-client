@@ -15,7 +15,7 @@ function selectCurr(curr: boolean) {
 
 const closeWindow = () => {
   console.log('closeWindow')
-  window.electron.ipcRenderer.send('win-ctrl', 'close')
+  window.electron.ipcRenderer.send('auth-win-ctrl', 'close')
 }
 </script>
 

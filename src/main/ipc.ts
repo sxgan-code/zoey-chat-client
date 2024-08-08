@@ -11,12 +11,22 @@ const onSigninSuccess = (callback): void => {
   })
 }
 /**
- * 监听窗口控制事件
+ * 监听认证窗口控制事件
  * @param callback
  */
-const onWindowsCtrl = (callback): void => {
-  ipcMain.on('win-ctrl', (e, ctrlStr: string): void => {
+const onAuthWindowsCtrl = (callback): void => {
+  ipcMain.on('auth-win-ctrl', (e, ctrlStr: string): void => {
     callback(ctrlStr)
   })
 }
-export { onSigninSuccess, onWindowsCtrl }
+
+/**
+ * 监听主窗口控制事件(min、max、unmax、close)
+ * @param callback
+ */
+const onMainWindowsCtrl = (callback): void => {
+  ipcMain.on('main-win-ctrl', (e, ctrlStr: string): void => {
+    callback(ctrlStr)
+  })
+}
+export { onSigninSuccess, onAuthWindowsCtrl, onMainWindowsCtrl }

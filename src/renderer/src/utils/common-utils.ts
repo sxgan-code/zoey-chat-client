@@ -12,7 +12,7 @@ type HrefType = (typeof HrefTypes)[number]
 
 export function goToHref(type: HrefType, address: string) {
   if (type === 'local_router') {
-    router.push({ path: address }).then(() => {})
+    router.push(address).then()
   } else {
     window.open(address)
   }
@@ -173,7 +173,7 @@ export const elementIsVisibleInViewport = (el: Element, partiallyVisible = false
   const { innerHeight, innerWidth } = window
   return partiallyVisible
     ? ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) &&
-        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
     : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth
 }
 /**

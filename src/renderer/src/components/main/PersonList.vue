@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { goToHref } from '@/utils/common-utils.ts'
 
 /**
  * 设置列表点击样式
@@ -8,6 +9,7 @@ const selectNodeNum = ref(-1)
 const selectCurrNode = (index: number) => {
   console.log(index)
   selectNodeNum.value = index
+  goToHref('local_router', '/main/chat/win/' + index)
 }
 </script>
 
@@ -23,7 +25,7 @@ const selectCurrNode = (index: number) => {
           <span class="name">订阅号{{ index }}</span>
           <span class="time">13:30</span>
         </div>
-        <div class="new-content">天外来物：哈哈哈哈</div>
+        <div class="new-content">天外来物：哈哈哈哈哈哈哈哈哈哈哈哈</div>
       </div>
     </div>
   </div>
@@ -63,22 +65,29 @@ const selectCurrNode = (index: number) => {
         width: 17rem;
         display: flex;
         justify-content: space-between;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        margin: 0.3rem 0;
 
         .name {
+          color: #333333;
           width: 8rem;
         }
 
         .time {
-          color: #bbbbbb;
+          color: #999999;
         }
       }
 
       .new-content {
         width: 17rem;
         height: 2rem;
-        font-size: 1.2rem;
-        color: #bbbbbb;
+        line-height: 2rem;
+        font-size: 1.4rem;
+        color: #999999;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
       }
     }
   }

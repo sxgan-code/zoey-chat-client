@@ -15,11 +15,17 @@ const mainRouters: RouteRecordRaw[] = [
     path: '/main',
     name: 'main',
     component: () => import('@/views/MainPage.vue'),
-    children:[
+    children: [
       {
-        path:'icons',
-        name:'icons',
-        component:()=>import('@/components/IconPage.vue')
+        path: 'icons',
+        name: 'icons',
+        component: () => import('@/components/IconPage.vue')
+      },
+      {
+        path: 'chat/win/:id',
+        name: 'chat-win',
+        component: () => import('@/components/main/ChatWinPart.vue'),
+        props: true
       }
     ]
   }

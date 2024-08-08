@@ -1,5 +1,7 @@
 @import "@/assets/css/color.scss";
 @import "@/assets/css/animation/index.scss";
+@import "@/assets/fonts/fonts.scss";
+
 /* 页面元素整体设置*/
 * {
   user-select: none;
@@ -28,6 +30,7 @@ html, body {
   overflow-y: hidden;
   overflow-x: hidden;
   font-size: 10px;
+  font-family: "HarmonyOS Sans", "JetBrains Mono", "黑体", "Microsoft YaHei", "宋体", "楷体", sans-serif;
 }
 
 /*滚动条整体样式*/
@@ -57,6 +60,7 @@ html, body {
 .drag {
   -webkit-app-region: drag; // 整个菜单栏可拖拽
 }
+
 .no-drag {
   -webkit-app-region: no-drag; // 鼠标移入时，不触发拖拽
 }
