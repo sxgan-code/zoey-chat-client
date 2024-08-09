@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
 import ZoeyButton from '@/components/btn/ZoeyButton.vue'
+import { emojis } from '@/assets/emoji/emoji.ts'
+import BubbleBox from '@/components/bubble/BubbleBox.vue'
+import { onUnmounted, ref } from 'vue'
 
 /**
  * 路由参数
@@ -9,6 +12,31 @@ defineProps({
   id: String
 })
 
+/* 气泡框 */
+const clickX = ref(0)
+const clickY = ref(0)
+const isSmailShow = ref(false)
+const clickBubbleBox = (event: Event) => {
+  clickX.value = event.clientX - event.offsetX
+  clickY.value = event.clientY - event.offsetY
+  isSmailShow.value = true
+}
+
+// 点击事件，用于隐藏div
+function hideBox(event: any) {
+  console.log(event)
+  // 检查事件是否来自i-user-info和div-user-info元素,且userInfoBox.value不为空
+  if (event.target.id !== 'smile-box-btn' && event.target.id !== 'smile-box') {
+    isSmailShow.value = false
+  }
+}
+
+// 绑定到window，确保即使点击框内也能监听外部点击
+document.body.addEventListener('click', hideBox)
+// 在onUnmounted生命周期钩子中移除事件监听，避免内存泄露
+onUnmounted(() => {
+  window.removeEventListener('click', hideBox)
+})
 </script>
 
 <template>
@@ -20,13 +48,21 @@ defineProps({
       </div>
     </div>
     <div class="box-content no-drag">
-
+      <div v-for="item in emojis">
+        {{ item.name }}
+        <div v-for="emo in item.list">
+          {{ emo.emo }}
+        </div>
+      </div>
     </div>
     <div class="send-msg-box no-drag">
       <div class="msg-icon-box">
-        <zoey-icon name="ali_smile" />
-        <zoey-icon name="ali_folder" />
-        <zoey-icon name="ali_comments" />
+        <bubble-box />
+        <zoey-icon id="smile-box-btn" name="ali_smile" @click="clickBubbleBox($event)" />
+        <zoey-icon id="folder-box" name="ali_folder" />
+        <zoey-icon id="comments-box" name="ali_comments" />
+        <bubble-box id="smile-box" :show="isSmailShow" width="500" height="300" :clickX="clickX" :clickY="clickY">HHHH
+        </bubble-box>
       </div>
       <div class="write-msg-box">
         <textarea />

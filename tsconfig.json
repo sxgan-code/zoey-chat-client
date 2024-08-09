@@ -17,7 +17,7 @@
     "noUnusedParameters": false,
     //不检查未使用的参数
     "noImplicitAny": false,
-    "strict": false
+    "strict": true
     // 关闭严格模式
   },
   "include": [
