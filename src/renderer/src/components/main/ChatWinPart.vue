@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import ZoeyIcon from '@/components/sys/ZoeyIcon.vue'
 import ZoeyButton from '@/components/btn/ZoeyButton.vue'
-import { emojis } from '@/assets/emoji/emoji.ts'
-import BubbleBox from '@/components/bubble/BubbleBox.vue'
-import { onUnmounted, ref } from 'vue'
+import { EmojiContentType, emojis } from '@/assets/emoji/emoji.ts'
+import SmailPart from '@/components/main/SmailPart.vue'
+import { ref, watch } from 'vue'
+import { send } from 'vite'
 
 /**
  * 路由参数
@@ -12,30 +13,21 @@ defineProps({
   id: String
 })
 
-/* 气泡框 */
-const clickX = ref(0)
-const clickY = ref(0)
-const isSmailShow = ref(false)
-const clickBubbleBox = (event: Event) => {
-  clickX.value = event.clientX - event.offsetX
-  clickY.value = event.clientY - event.offsetY
-  isSmailShow.value = true
+const sendMsgVal = ref('==============================saaaaaaaaaaaaaaaaaaaalllllllllllll' +
+  'lllllllllllllllllllllllllllllllllllllllllllllllllllladfjjdklfjkdn啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦' +
+  ' 事实上事实上少时诵诗书是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是撒是大少时诵诗书少时诵诗书是撒是撒')
+const writeEmoji = (emo: EmojiContentType) => {
+  sendMsgVal.value += emo.emoji
 }
+const msgRef = ref()
+const scrollBottom = (event: Event) => {
+  console.log(msgRef.value.sorollTop, msgRef.value.scrollHeight)
 
-// 点击事件，用于隐藏div
-function hideBox(event: any) {
-  console.log(event)
-  // 检查事件是否来自i-user-info和div-user-info元素,且userInfoBox.value不为空
-  if (event.target.id !== 'smile-box-btn' && event.target.id !== 'smile-box') {
-    isSmailShow.value = false
-  }
 }
-
-// 绑定到window，确保即使点击框内也能监听外部点击
-document.body.addEventListener('click', hideBox)
-// 在onUnmounted生命周期钩子中移除事件监听，避免内存泄露
-onUnmounted(() => {
-  window.removeEventListener('click', hideBox)
+watch(sendMsgVal,(nwe,old)=>{
+  console.log(msgRef)
+  console.log(msgRef.value.sorollTop, msgRef.value.scrollHeight)
+  msgRef.value.sorollTop = msgRef.value.scrollHeight
 })
 </script>
 
@@ -48,24 +40,11 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="box-content no-drag">
-      <div v-for="item in emojis">
-        {{ item.name }}
-        <div v-for="emo in item.list">
-          {{ emo.emo }}
-        </div>
-      </div>
     </div>
     <div class="send-msg-box no-drag">
-      <div class="msg-icon-box">
-        <bubble-box />
-        <zoey-icon id="smile-box-btn" name="ali_smile" @click="clickBubbleBox($event)" />
-        <zoey-icon id="folder-box" name="ali_folder" />
-        <zoey-icon id="comments-box" name="ali_comments" />
-        <bubble-box id="smile-box" :show="isSmailShow" width="500" height="300" :clickX="clickX" :clickY="clickY">HHHH
-        </bubble-box>
-      </div>
+      <smail-part @send:emoji="writeEmoji" />
       <div class="write-msg-box">
-        <textarea />
+        <textarea ref="msgRef" v-model="sendMsgVal" />
       </div>
       <div class="send-btn">
         <zoey-button class="btn" type="primary" plain size="small">发送</zoey-button>
@@ -137,26 +116,6 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
 
-    .msg-icon-box {
-      height: 3rem;
-      display: flex;
-      align-items: center;
-      padding-left: 2rem;
-
-      svg {
-        width: 1.8rem;
-        height: 1.8rem;
-        cursor: pointer;
-        margin-right: 1.5rem;
-        fill: #545454;
-
-        &:hover {
-          fill: #222222;
-        }
-      }
-
-    }
-
     .write-msg-box {
       flex: 8;
 
@@ -168,7 +127,7 @@ onUnmounted(() => {
         border: none;
         line-height: 2.4rem;
         height: 7rem;
-        overflow-y: auto;
+        overflow: auto;
         font-size: 1.5rem;
         padding: 0 2rem;
       }
