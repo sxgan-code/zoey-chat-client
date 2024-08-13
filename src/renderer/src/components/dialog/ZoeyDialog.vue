@@ -39,7 +39,6 @@ const closeDialog = () => emit('update:modelValue', visible)
   </div>
 </template>
 
-
 <style lang="scss" scoped>
 .modal {
   position: fixed;

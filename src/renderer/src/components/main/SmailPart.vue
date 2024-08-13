@@ -69,7 +69,7 @@ const clickSmailShow = () => {
     <zoey-icon id="smile-box-btn" name="ali_smile" @click="clickBubbleBox($event,1)" />
     <zoey-icon id="folder-box-btn" name="ali_folder" />
     <zoey-icon id="comments-box" name="ali_comments" />
-    <bubble-box :show="isSmailShow" @update:modelValue="clickSmailShow" :width="500" :height="500"
+    <bubble-box :show="isSmailShow" @update:modelValue="clickSmailShow" :width="400" :height="400"
                 :clickX="clickX" :clickY="clickY">
       <div class="small">
         <div class="top">
@@ -133,16 +133,16 @@ const clickSmailShow = () => {
 }
 
 .small {
-  width: 50rem;
-  height: 50rem;
+  width: 40rem;
+  height: 40rem;
 
   .top {
-    width: 48rem;
-    height: 44rem;
+    width: 38rem;
+    height: 34rem;
     margin: 0 auto;
 
     .title {
-      width: 48rem;
+      width: 38rem;
       line-height: 3rem;
       margin: 0 auto;
       font-size: 1.4rem;
@@ -151,8 +151,8 @@ const clickSmailShow = () => {
     }
 
     .emo-list {
-      width: 48rem;
-      height: 40rem;
+      width: 38rem;
+      height: 30rem;
       display: flex;
       flex-wrap: wrap;
       overflow-y: auto;
@@ -178,14 +178,14 @@ const clickSmailShow = () => {
   }
 
   hr {
-    width: 48rem;
+    width: 38rem;
     color: #cccccc;
     margin: 0 auto;
     opacity: 0.2;
   }
 
   .menu {
-    width: 48rem;
+    width: 38rem;
     margin: 0 auto;
     height: 5rem;
     display: flex;
@@ -193,8 +193,8 @@ const clickSmailShow = () => {
     align-items: center;
 
     div {
-      width: 4rem;
-      height: 4rem;
+      width: 3rem;
+      height: 3rem;
       margin: 0.8rem;
       display: flex;
       justify-content: center;

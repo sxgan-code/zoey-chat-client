@@ -73,7 +73,6 @@ const toSignin = () => {
       .catch(() => {
         isLoading.value = false
         message.error('系统错误')
-        goToHref('local_router', '/main')
       })
   }
 }
