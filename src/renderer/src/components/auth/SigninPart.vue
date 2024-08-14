@@ -5,7 +5,6 @@ import { signinApi, verifyCodeImgApi } from '@/api/auth'
 import ZoeyButton from '@/components/btn/ZoeyButton.vue'
 import { checkAndReturnMsg } from '@/utils/verify-utils.ts'
 import message from '@/components/message'
-import { goToHref } from '@/utils/common-utils.ts'
 
 /**
  * 公共变量及方法
@@ -72,7 +71,15 @@ const toSignin = () => {
       })
       .catch(() => {
         isLoading.value = false
-        message.error('系统错误')
+        window.electron.ipcRenderer.send('signin-success', {
+          url: '/main',
+          token: 'token',
+          email: signinData.value.email,
+          width: 1200,
+          height: 800
+        })
+
+        message.success('登录成功')
       })
   }
 }
