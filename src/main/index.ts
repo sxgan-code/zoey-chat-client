@@ -4,6 +4,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { onAuthWindowsCtrl, onMainWindowsCtrl, onSigninSuccess } from './ipc.ts'
 import { SigninSuccessData } from './ipc-types.ts'
+import db from './sqlite.ts'
 
 const auth_win_width = 600
 const auth_win_height = 520
@@ -140,6 +141,8 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+
   createAuthWindow()
 
   // Signin success
@@ -148,6 +151,12 @@ app.whenReady().then(() => {
     console.log(config)
     // 关闭认证窗口打开主窗口
     authWindow.close()
+    db.each('SELECT * FROM test', (err, row) => {
+      if (err) {
+        console.error(err.message)
+      }
+      console.log(row)
+    })
     createMainWindow(config)
   })
   app.on('activate', function() {
