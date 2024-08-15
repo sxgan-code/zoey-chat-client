@@ -1,7 +1,15 @@
 import sq3 from 'sqlite3'
+import { is } from '@electron-toolkit/utils'
 
 const sqlite3 = sq3.verbose()
-const db = new sqlite3.Database('sq3.db')
+let db: sq3.Database
+if (is.dev) {
+  db = new sqlite3.Database('db/chat.db')
+} else {
+  // 打包使用绝对路径
+  db = new sqlite3.Database('D:/workspace/zoey-chat-client/db/chat.db')
+}
+
 
 db.serialize(() => {
   db.run('create table test(name varchar(20))', () => {

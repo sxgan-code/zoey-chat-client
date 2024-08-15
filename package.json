@@ -29,6 +29,7 @@
     "bindings": "^1.5.0",
     "electron-updater": "^6.1.7",
     "element-plus": "^2.7.8",
+    "file-uri-to-path": "^2.0.0",
     "rebuild": "^0.1.2",
     "sqlite3": "^5.1.7",
     "vue-router": "^4.4.2"
