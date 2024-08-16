@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain, screen, shell } from 'electron'
 import { join } from 'path'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { onAuthWindowsCtrl, onMainWindowsCtrl, onSigninSuccess } from './ipc.ts'
+import { onAuthWindowsCtrl, onMainWindowsCtrl, onSigninSuccess, onTestMsg } from './ipc.ts'
 import { SigninSuccessData } from './ipc-types.ts'
 import db from './sqlite.ts'
 
@@ -59,7 +59,6 @@ function createAuthWindow(): void {
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     authWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    authWindow.webContents.openDevTools({ mode: 'detach' })
     authWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 }
@@ -88,7 +87,7 @@ function createMainWindow(config: SigninSuccessData): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
+      sandbox: false
       //关闭web权限检查，允许跨域
       // webSecurity: false
     }
@@ -107,10 +106,23 @@ function createMainWindow(config: SigninSuccessData): void {
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + `#${config.url}`)
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'), { hash: config.url })
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
-
+  onTestMsg((e, msg): any => {
+    console.log(msg)
+    return new Promise((resolve, reject) => {
+      db.all('select * from test', (err, rows) => {
+        if (err) {
+          reject({ code: 400, message: 'error' })
+        } else {
+          resolve(JSON.stringify(rows))
+        }
+      })
+    })
+  })
   onMainWindowsCtrl((ctrlStr) => {
     if (ctrlStr == 'close') {
       mainWindow.close()
