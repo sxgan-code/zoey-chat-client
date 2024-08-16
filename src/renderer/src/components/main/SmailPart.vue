@@ -9,7 +9,12 @@ let props = defineProps({
   show: { type: Boolean, default: false }//弹框是否显示
 })
 const emitSmail = defineEmits<{ (event: 'send:emoji', emo: EmojiContentType): void }>()
-const sendEmoji = (emo: EmojiContentType) =>{
+const sendEmoji = (emo: EmojiContentType) => {
+  const msg = window.electron.ipcRenderer.invoke('test-msg', 'clickmsg')
+  msg.then((res) => {
+    console.log(res)
+  })
+  console.log(msg)
   emitSmail('send:emoji', emo)
 }
 const nodeNum = ref(1)

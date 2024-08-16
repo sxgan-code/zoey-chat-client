@@ -24,9 +24,20 @@ const onAuthWindowsCtrl = (callback): void => {
  * 监听主窗口控制事件(min、max、unmax、close)
  * @param callback
  */
-const onMainWindowsCtrl = (callback): void => {
+const onMainWindowsCtrl = (callback: Function): void => {
   ipcMain.on('main-win-ctrl', (e, ctrlStr: string): void => {
     callback(ctrlStr)
   })
 }
-export { onSigninSuccess, onAuthWindowsCtrl, onMainWindowsCtrl }
+
+const onTestMsg = (callback: Function): any => {
+  ipcMain.handle('test-msg', (e, ctrlStr: string): void => {
+    return callback(e, ctrlStr)
+  })
+}
+export {
+  onSigninSuccess,
+  onAuthWindowsCtrl,
+  onMainWindowsCtrl,
+  onTestMsg
+}
